@@ -1,0 +1,11 @@
+.github/
+.husky/
+src/
+tests/
+tsconfig.json
+dist/tests/
+prisma/
+node_modules
+.env
+.env.example
+.eslintrc.cjs
