@@ -1,12 +1,16 @@
 # prisma-where-required
 
+## Project Status
+
+Please note that this project is currently in **Alpha**. While this software is open-source and contributions are welcome, please be aware that functionality may change, and there may be bugs or missing features.
+
+
 ## Overview
 prisma-where-required is a utility that enforces certain fields to be mandatory in the 'where' clause when using Prisma. 
 This tool was primarily created with multi-tenant systems in mind.
 
-
-##  Prisma version compatibility
 This extension requires Prisma 4.0.0 or higher.
+
 
 ## Usage
 1. `npm i @kz-d/prisma-where-required -D`
