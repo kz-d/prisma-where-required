@@ -1,0 +1,39 @@
+{
+  "name": "@kz-d/prisma-where-required",
+  "version": "0.0.0-alpha.7",
+  "description": "Make certain fields required in where clause for Prisma",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "kz-d",
+  "bin": {
+    "prisma-where-required": "./dist/generator.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "generate:prisma": "prisma generate",
+    "test": "npx prisma generate && tsc tests/*.test.ts --noEmit",
+    "lint": "eslint ./src"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.46.0",
+    "prisma": "^4.16.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "@prisma/client": "^5.0"
+  },
+  "dependencies": {
+    "@prisma/generator-helper": "^5.0",
+    "@prisma/internals": "^5.0",
+    "ts-morph": "^19.0.0"
+  },
+  "peerDependencies": {
+    "@prisma/client": ">= 4.0"
+  }
+}
