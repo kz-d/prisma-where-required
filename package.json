@@ -15,6 +15,7 @@
   "scripts": {
     "build": "tsc",
     "generate:prisma": "prisma generate",
+    "generate:typeTestFile": "ts-node tests/generateTypeTestFile.ts",
     "test": "npx prisma generate && tsc tests/*.test.ts --noEmit",
     "lint": "eslint ./src"
   },
