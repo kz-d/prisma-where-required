@@ -39,13 +39,13 @@ model User {
 After these steps, your code will display the following behaviour:
 
 ```
-// @ts-expect-error args are requered
+// @ts-expect-error args are required
 prisma.user.findMany()
 
-// @ts-expect-error where is requered
+// @ts-expect-error where is required
 prisma.user.findMany({})
 
-// @ts-expect-error organizationId is requered
+// @ts-expect-error organizationId is required
 prisma.user.findMany({where: {}})
 ```
 
