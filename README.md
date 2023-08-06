@@ -2,7 +2,7 @@
 
 ## Project Status
 
-Please note that this project is currently in **Alpha**. While this software is open-source and contributions are welcome, please be aware that functionality may change, and there may be bugs or missing features.
+Please note that this project is currently in **Beta**. While this software is open-source and contributions are welcome, please be aware that functionality may change, and there may be bugs or missing features.
 
 
 ## Overview
@@ -58,6 +58,8 @@ prisma.user.findMany({
 ```
 
 ## Caution
-This implementation is somewhat forceful and the compatibility with future versions of Prisma is uncertain. Please exercise careful judgement when applying this to a production environment.
+This implementation is somewhat forceful and the compatibility with future versions of Prisma is uncertain. In particular, using OR, AND, NOT or nested where clauses requires a very verbose and awkward writing style.  
+Please exercise careful judgement when applying this to a production environment.
 
 However, it's worth noting that this tool only impacts types, making it easy to opt-out if necessary.
+
