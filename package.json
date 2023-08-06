@@ -1,6 +1,6 @@
 {
   "name": "@kz-d/prisma-where-required",
-  "version": "0.0.0-alpha.7",
+  "version": "0.0.0-beta.2",
   "description": "Make certain fields required in where clause for Prisma",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

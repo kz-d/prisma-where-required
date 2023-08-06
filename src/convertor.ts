@@ -63,13 +63,19 @@ function removeQuestionTokenFromWhereFieldProperty(sourceFile: SourceFile, model
             if (property.getName() !== 'where') { 
                 continue
             }
+
+            const propertyTypeNode = property.getTypeNode()
+
+            if (!propertyTypeNode || !models.some((targetModel) => propertyTypeNode.getText() === `${targetModel}WhereInput`)) {
+                continue
+            }
             
             if (property.hasQuestionToken() === false) {
                 continue 
             }
 
             console.debug(`remove question token from ${targetType.getName()}.where`)
-                property.setHasQuestionToken(false)
+            property.setHasQuestionToken(false)
         }
     }
 }

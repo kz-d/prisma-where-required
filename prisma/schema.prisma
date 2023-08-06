@@ -24,6 +24,12 @@ model User {
   posts Post[]
 }
 
+model UserPost {
+  id    Int     @id @default(autoincrement())
+  title String
+  organizationId Int
+}
+
 model Post {
   id        Int     @id @default(autoincrement())
   title     String
