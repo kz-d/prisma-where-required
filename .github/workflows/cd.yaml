@@ -1,0 +1,43 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches:
+      - main
+  # todo delete
+  pull_request:
+    branches:
+      - main
+
+jobs:
+ cd:
+    name: Continuous Delivery
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: checkout
+      uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+    - name: setup nodejs
+      uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c
+      with:
+        node-version: 18.x
+    - name: package install
+      run: npm i
+    - name: Run integration tests
+      run: |
+        npm run build
+    - name: Semantic Release
+      uses: cycjimmy/semantic-release-action@v3
+      with:
+        semantic_version: 16
+        # todo delete
+        ci: true
+        dry_run: true
+        branch: |
+          [
+          'main'
+          ]
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

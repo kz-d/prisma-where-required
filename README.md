@@ -7,7 +7,7 @@ Please note that this project is currently in **Beta**. While this software is o
 
 ## Overview
 prisma-where-required is a utility that enforces certain fields to be mandatory in the 'where' clause when using Prisma. 
-This tool was primarily created with multi-tenant systems in mind.
+This tool was primarily created with multi-tenant systems or to perform a soft delete in mind.
 
 This extension requires Prisma 4.0.0 or higher.
 
