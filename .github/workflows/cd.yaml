@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-  # todo delete
-  pull_request:
-    branches:
-      - main
 
 jobs:
  cd:
@@ -31,9 +27,6 @@ jobs:
       uses: cycjimmy/semantic-release-action@v3
       with:
         semantic_version: 16
-        # todo delete
-        ci: true
-        dry_run: true
         branch: |
           [
           'main'
