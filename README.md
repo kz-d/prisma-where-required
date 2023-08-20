@@ -1,10 +1,5 @@
 # prisma-where-required
 
-## Project Status
-
-Please note that this project is currently in **Beta**. While this software is open-source and contributions are welcome, please be aware that functionality may change, and there may be bugs or missing features.
-
-
 ## Overview
 prisma-where-required is a utility that enforces certain fields to be mandatory in the 'where' clause when using Prisma. 
 This tool was primarily created with multi-tenant systems or to perform a soft delete in mind.
