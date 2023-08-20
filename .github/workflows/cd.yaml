@@ -20,7 +20,7 @@ jobs:
         node-version: 18.x
     - name: package install
       run: npm i
-    - name: Run integration tests
+    - name: build
       run: |
         npm run build
     - name: Semantic Release
