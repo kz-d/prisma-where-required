@@ -42,6 +42,9 @@ prisma.user.findMany({})
 
 // @ts-expect-error organizationId is required
 prisma.user.findMany({where: {}})
+
+// compile ok
+prisma.user.findMany({where: {organizationId: 1}})
 ```
 
 If you want to perform a search across all records for the mandatory field, you need to **explicitly specify undefined**:
