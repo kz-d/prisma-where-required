@@ -12,6 +12,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kz-d/prisma-where-required"
+  },
+  "keywords": ["prisma"],
   "scripts": {
     "build": "tsc",
     "generate:prisma": "prisma generate",
