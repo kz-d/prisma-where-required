@@ -25,6 +25,8 @@ generatorHandler({
       return;
     }
 
+    const debug = options.generator.config.debug === "true"
+
     const requiredModelAndFields = new Map<string, string[]>()
     const models = options.dmmf.datamodel.models
 
@@ -35,6 +37,6 @@ generatorHandler({
       }
     }
 
-    convert({path: `${nodeModulePath}/.prisma/client/index.d.ts`, modelAndFields: requiredModelAndFields})
+    convert({path: `${nodeModulePath}/.prisma/client/index.d.ts`, modelAndFields: requiredModelAndFields, debug})
   },
 });
