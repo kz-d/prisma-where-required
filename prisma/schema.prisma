@@ -9,6 +9,7 @@ generator where-required {
   provider = "ts-node ./src/generator.ts"
   // provider = "prisma-where-required"
   nodeModulePath = "node_modules"
+  debug = true
 }
 
 datasource db {

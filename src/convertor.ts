@@ -1,6 +1,6 @@
 import { Project, Node, SourceFile } from "ts-morph";
 
-function removeQuestionTokenFromTargetFieldProperty(sourceFile: SourceFile, modelAndFields: Map<string, string[]>) {
+function removeQuestionTokenFromTargetFieldProperty(sourceFile: SourceFile, modelAndFields: Map<string, string[]>, debug: boolean) {
     const prismaNamespace = sourceFile.getModuleOrThrow("Prisma");
     const allWhereInputTypes = prismaNamespace.getTypeAliases()
         .filter(typeAlias => typeAlias.getName().endsWith("WhereInput"));
@@ -30,8 +30,10 @@ function removeQuestionTokenFromTargetFieldProperty(sourceFile: SourceFile, mode
                     continue
                 }
                 
-                console.debug(`remove question token from ${targetModel}.${property.getName()}`)
-                console.debug(`add undefined type to ${targetModel}.${property.getName()}`)
+                if (debug) {
+                    console.debug(`remove question token from ${targetModel}.${property.getName()}`)
+                    console.debug(`add undefined type to ${targetModel}.${property.getName()}`)
+                }
 
                 const currentType = property.getTypeNode()!.getText();
                 const newType = `${currentType} | undefined`;
@@ -41,7 +43,7 @@ function removeQuestionTokenFromTargetFieldProperty(sourceFile: SourceFile, mode
     }
 }
 
-function removeQuestionTokenFromWhereFieldProperty(sourceFile: SourceFile, models: string[]) {
+function removeQuestionTokenFromWhereFieldProperty(sourceFile: SourceFile, models: string[], debug: boolean) {
     const prismaNamespace = sourceFile.getModuleOrThrow("Prisma");
     const allTypes = prismaNamespace.getTypeAliases()
         .filter(typeAlias => models.some((targetModel) => typeAlias.getName().startsWith(targetModel) && !typeAlias.getName().startsWith(`${targetModel}$`)));
@@ -74,13 +76,16 @@ function removeQuestionTokenFromWhereFieldProperty(sourceFile: SourceFile, model
                 continue 
             }
 
-            console.debug(`remove question token from ${targetType.getName()}.where`)
+            if (debug) {
+                console.debug(`remove question token from ${targetType.getName()}.where`)
+            }
+
             property.setHasQuestionToken(false)
         }
     }
 }
 
-function removeQuestionTokenFromActionFuncProperty(sourceFile: SourceFile, models: string[]) {
+function removeQuestionTokenFromActionFuncProperty(sourceFile: SourceFile, models: string[], debug: boolean) {
     const prismaNamespace = sourceFile.getModuleOrThrow("Prisma");
     const delegates = prismaNamespace.getInterfaces()
         .filter(_interface => models.some((targetModel) => _interface.getName() === `${targetModel}Delegate`));
@@ -95,20 +100,23 @@ function removeQuestionTokenFromActionFuncProperty(sourceFile: SourceFile, model
                 continue 
             }
             
-            console.debug(`remove question token from ${delegate.getName()}.${targetMethod.getName()}.args`)
+            if (debug) {
+                console.debug(`remove question token from ${delegate.getName()}.${targetMethod.getName()}.args`)
+            }
+            
             parameter.setHasQuestionToken(false)
         }
     }
 }
 
-export function convert(args: {path: string, modelAndFields: Map<string, string[]>}) {
+export function convert(args: {path: string, modelAndFields: Map<string, string[]>, debug: boolean}) {
     const project = new Project();
     const sourceFile = project.addSourceFileAtPath(args.path);
     const models = Array.from(args.modelAndFields.keys())
 
-    removeQuestionTokenFromTargetFieldProperty(sourceFile, args.modelAndFields)
-    removeQuestionTokenFromWhereFieldProperty(sourceFile, models)
-    removeQuestionTokenFromActionFuncProperty(sourceFile, models)
+    removeQuestionTokenFromTargetFieldProperty(sourceFile, args.modelAndFields, args.debug)
+    removeQuestionTokenFromWhereFieldProperty(sourceFile, models, args.debug)
+    removeQuestionTokenFromActionFuncProperty(sourceFile, models, args.debug)
 
     sourceFile.saveSync();
 }
